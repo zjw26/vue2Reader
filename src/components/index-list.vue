@@ -1,19 +1,20 @@
 <template>
     <section class="channel-h5 top-home">
-        <div class="channel-h5__header">
+        <div class="channel-h5__header" :class="title1?'':'hide'">
             <!-- <p class="channel-h5__title">
                 <slot name="title"></slot>
             </p>     -->
-            <div  class="book-list-top">
-                <h2  class="book-list-title">男生热门</h2>
+            <div  class="book-list-top" >
+                <h2  class="book-list-title">
+                    {{title1}}
+                </h2>
                 <div  class="book-list-more fr">
-                    <router-link :to="'/more/'" style="color:red">更多</router-link>
+                    <a  style="color:red" @click="setMoreData()">更多</a>
                 </div>
             </div>
         </div>
-        <ul class="list-h5">
-            <li v-for="(item,index) in hot" v-if="index<4" @click="toBook(item._id)">
-                <router-link :to="{ name: 'book', params: {id: item._id} }">
+        <ul class="list-h5" :style="padding">
+            <li v-for="(item,index) in listData" v-if="ind?index<ind:index<listData.length" @click="toBook(item._id)">
                     <div class="book-h5">
                         <div class="book-h5__cover">
                             <img :alt="item.title" :src="'http://statics.zhuishushenqi.com'+item.cover">
@@ -29,7 +30,6 @@
                             </div>
                         </div>
                     </div>
-                </router-link>
             </li>
         </ul>
     </section>
@@ -40,29 +40,46 @@
 export default {
   name: 'hot',
   props:{
-      hot:Array
+      listData:Array,
+      ind:Number,
+      title:String,
+      padding:String
   },
   data(){
       return{
-
+          title1:this.title
       }
   },
   methods:{
       toBook:function(id){
-            location.href="/book?id="+id;
+        console.log(id)
+        this.$router.push({ name: 'book', query: {id: id} });
       },
+      setMoreData(){
+          this.$router.push({ name: 'more'})
+          this.$store.state.moreData = this.listData;
+          this.$store.state.title = this.title;
+          console.log(this.$store.state.moreData)
+      }
+  },
+  mounted:function(){
+      var that = this;
+      this.title1 = this.title;
   }
 }
 </script>
 
 <style>
+    .hide{
+        display: none;
+    }
     .channel-h5 {
         background: #fff;
         border-bottom: 10 solid #f5f5f5;
         position: relative;
     }
     .channel-h5__header {
-        padding: 10px 13px 8px 13px;
+        padding: 10px 0px 2px 13px;
         border-bottom: 1px solid #f0f0f0;
         position: relative;
     }

@@ -1,14 +1,14 @@
 <template>
     <section class="tabbar">
-        <router-link :to="{ name: 'index' }" class="tab-item" exact style="background:#efe6e0">
-            <div class="tab-item-icon">
+        <router-link :to="{ name: 'index' }" class="tab-item" exact>
+            <div class="tab-item-icon"  @click="setActive(0)">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shouye"></use>
                 </svg>
             </div>
             <p class="tab-item-label">首页</p>
         </router-link>
-        <router-link :to="{ name: 'index' }" class="tab-item" exact>
+        <router-link :to="{ name: 'book' }" class="tab-item" exact>
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-zhuanti"></use>
@@ -16,7 +16,7 @@
             </div>
             <p class="tab-item-label">专题</p>
         </router-link>
-        <router-link :to="{ name: 'index' }" class="tab-item" exact>
+        <router-link :to="{ name: 'category' }" class="tab-item" exact > 
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fenlei"></use>
@@ -24,7 +24,7 @@
             </div>
             <p class="tab-item-label">分类</p>
         </router-link>
-        <router-link :to="{ name: 'index' }" class="tab-item" exact>
+        <router-link :to="{ name: 'rank' }" class="tab-item" exact>
             <div class="tab-item-icon">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-paixing"></use>
@@ -41,18 +41,22 @@ export default {
     data() {
         return {};
     },
+    methods:{
+    },
     mounted:function(){
-        $('.tabbar').width($(window).width());
-        $('.tab-item').on('click',function(e){
-            $('.tab-item').css('background','white');
-            $(e.currentTarget).css('background','#efe6e0');
-        })
     }
     
 }
 </script>
 
 <style scoped lang="scss">
+.router-link-active{
+     background:#efe6e0;
+}
+.active {
+        background:#efe6e0;
+}
+
 .tabbar {
     position: fixed;
     left: 0;
@@ -73,6 +77,8 @@ export default {
         &.router-link-exact-active {
         }
     }
+
+    
 
     .tab-item-icon {
         width: 24px;

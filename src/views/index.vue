@@ -5,12 +5,16 @@
             <div class="container-wrap" style="float:left">
                 <div class="container-scroll">
                     <index-top></index-top>
-                    <index-list :hot="hot">
-                        <span slot="title">男生热门</span>
+                    <index-list :listData="malehot" :ind=5 :title="'男生热门'">
                     </index-list>
-                    <div class="pageLoading" v-if="isShowPageLoading">
-                    </div>
+                    <index-list :listData="femalehot" :ind=5 :title="'女生最爱'">
+                    </index-list>
+                    <index-list :listData="three" :ind=5 :title="'仙侠'">
+                    </index-list>
+                    <index-list :listData="four" :ind=5 :title="'青春校园'">
+                    </index-list>
                 </div>
+                <list-loading v-show="isLoading"></list-loading>
             </div>
             <div style="float:left" class="container-wrap">
                 <div class="container-scroll">
@@ -19,7 +23,7 @@
             </div>
             
         </div>
-        <tabbar></tabbar>
+        
     </div>
 </template>
 
@@ -29,6 +33,7 @@ import Header from "../components/header";
 import indexTop from "../components/index-top";
 import indexShelf from "../components/index-shelf";
 import indexList from "../components/index-list";
+import listLoading from '../components/list-loading';
 import api from '../fetch/api.js';
 import tabbar from '../components/tabbar'
 
@@ -39,7 +44,11 @@ export default {
             screen_width:0,
             double_screen_width:0,
             position:0,
-            hot:[],
+            malehot:[],
+            femalehot:[],
+            three:[],
+            four:[],
+            isLoading:true,
             // recommend:d.index.items[2].data.data,
             // female:d.female.data,
             // male:d.male.data,
@@ -64,7 +73,8 @@ export default {
         indexTop,
         indexShelf,
         tabbar,
-        indexList
+        indexList,
+        listLoading
     },
     computed: {
         cover(cover) {
@@ -125,7 +135,20 @@ export default {
         getList(){
             var that = this;
             api.getCatBooks('male','hot','玄幻').then(data=>{
-                that.hot = data;
+                that.malehot = data;
+                that.isLoading = false;
+            })
+            api.getCatBooks('female','hot','古代言情').then(data=>{
+                that.femalehot = data;
+                that.isLoading = false;
+            })
+            api.getCatBooks('male','hot','仙侠').then(data=>{
+                that.three = data;
+                that.isLoading = false;
+            })
+            api.getCatBooks('female','hot','青春校园').then(data=>{
+                that.four = data;
+                that.isLoading = false;
             })
         }
     }

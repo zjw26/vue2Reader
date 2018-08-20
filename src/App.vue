@@ -1,13 +1,18 @@
 <template>
   <div id="app">
     <router-view/>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
 import '../static/css/reset.css'
+import tabbar from './components/tabbar'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    tabbar
+  }
 }
 </script>
 
