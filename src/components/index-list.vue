@@ -24,7 +24,7 @@
                             <p class="book-h5__title">{{item.title}}</p>
                             <p class="book-h5__author"><img src="/static/img/people.png">{{item.author}}</p>
                             <p class="book-h5__summary">{{item.shortIntro}}</p>
-                            <div class="book-h5__wrap">
+                            <div class="book-h5__wrap" v-show="item.majorCate">
                                 <div class="book-h5__tag">{{item.majorCate}}</div>
                                 <div class="book-h5__tag">{{item.minorCate}}</div>
                             </div>

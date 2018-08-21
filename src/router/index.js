@@ -5,7 +5,8 @@ import Index from '@/views/index'
 import Book from '@/views/book'
 import More from '@/views/more'
 import Category from '@/views/category'
-import Rank from '@/views/Rank'
+import Rank from '@/views/rank'
+import Search from '@/views/search'
 Vue.use(Router)
 
 export default new Router({
@@ -35,6 +36,11 @@ export default new Router({
       path: '/rank',
       name: 'rank',
       component : Rank
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component : Search
     }
   ]
 })

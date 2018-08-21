@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
 import api from '../fetch/api';
 import indexList from '@/components/index-list';
 import listLoading from '@/components/List-loading';
@@ -36,7 +35,6 @@ export default {
 		indexList,
 		listLoading,
 		backBar,
-		listLoading
 	},
 	data() {
 		return {

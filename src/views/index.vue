@@ -116,9 +116,6 @@ export default {
             }
             console.log(pos)
         },
-        toBook:function(id){
-            location.href="/book?id="+id;
-        },
         
         changeMale:function(){
             this.minIndexM=Math.round(Math.random()*11 + 0);
